@@ -6,20 +6,20 @@ case $1 in
         cat << 'EOM'
 graph_title Humidity
 graph_vlabel humidity[%]
-graph_category am2321
+graph_category dht12
 graph_args --rigid --lower-limit 0 --upper-limit 100
-graph_info Humidity measured with Aosong's AM2321 sensor.
+graph_info Humidity measured with Aosong's DHT12 sensor.
 desirable.label desirable
 desirable.info Desirable humidity (60%).
 humidity.label humidity
-humidity.info Humidity measured with AM2321.
+humidity.info Humidity measured with DHT12.
 EOM
 
         exit 0;;
 esac
 
-# measure temperature and humidity with am2321
-temp_humid=`sleep 2; /home/pi/am2321/am2321` || exit 1
+# measure temperature and humidity with dht12
+temp_humid=`sleep 2; /usr/local/bin/dht12` || exit 1
 
 # print humidity in Munin plugin format
 echo "desirable.value 60.0"

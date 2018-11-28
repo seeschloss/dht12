@@ -6,18 +6,18 @@ case $1 in
         cat << 'EOM'
 graph_title Temperature / Humidity
 graph_vlabel temp[‹C] / humid[%]
-graph_info Temperature and humidity measured with Aosong's AM2321 sensor.
+graph_info Temperature and humidity measured with Aosong's DHT12 sensor.
 temperature.label temperature
-temperature.info Temperature measured with AM2321.
+temperature.info Temperature measured with DHT12.
 humidity.label humidity
-humidity.info Humidity measured with AM2321.
+humidity.info Humidity measured with DHT12.
 EOM
 
         exit 0;;
 esac
 
-# measure temperature and humidity with am2321
-temp_humid=`/home/pi/am2321/am2321` || exit 1
+# measure temperature and humidity with dht12
+temp_humid=`/usr/local/bin/dht12` || exit 1
 
 # print the result in Munin plugin format
 printf "temperature.value "; echo $temp_humid | cut -d ' ' -f1
